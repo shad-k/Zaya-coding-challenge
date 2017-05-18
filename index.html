@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Create a Course</title>
 	<link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
 	<div class="container-fluid">
@@ -21,7 +22,7 @@
 							<li>1</li>
 							<li>2</li>
 						</ul>
-					</div>
+					</div><!-- dropdown Subject-->
 
 					<div class="dropdown col-sm-3">
 						<button class="btn btn-default dropdown-toggle col-xs-12" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -31,21 +32,21 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
 						</ul>
-					</div>
+					</div><!-- dropdown Grade-->
 
 					<div class="searchBar col-sm-4">
 						<div class="input-group">
 							<!-- <span class="glyphicon glyphicon-search input-group-addon"></span> -->
 							<input type="text" class="form-control" placeholder="&#61447; Search">
 						</div>
-					</div>
-				</div>
+					</div><!-- searchBar -->
+				</div><!-- selectors -->
 
 				<div class="lessons col-xs-12">
 					<div class="lesson col-xs-12">
 						<div class="col-sm-4 lessonImg">
 							<img src="http://placeholder.pics/svg/200x150/3819FF-FF3F3F" alt="" class="col-xs-12 img-responsive">
-						</div>
+						</div><!-- lessonImg -->
 
 						<div class="lessonDetails col-sm-6">
 							<h4 class="title col-xs-12">Indices</h4>
@@ -58,37 +59,37 @@
 								<span class="glyphicon glyphicon-file"></span>
 								<span class="lessonVideo">1</span>
 								<span class="glyphicon glyphicon-question-sign"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+							</div><!-- lessonContents -->
+						</div><!-- lessonDetails -->
+					</div><!-- lesson -->
+				</div><!-- lessons -->
+			</div><!-- leftSide -->
 
 			<div class="rightSide col-xs-12 col-sm-6">
-				<h4 class="col-sm-12">Create a new Course</h4>
+				<h4 class="col-xs-12">Create a new Course</h4>
 				<div class="courseName col-sm-12">
 					<h3 class="col-sm-12">Algebra</h3>
 				</div>
 
-				<h5 class="col-sm-12">Topics</h5>
+				<h5 class="col-xs-12">Topics</h5>
 
-				<div class="topics">
-					<div class="topic">
-						<div class="topicNo col-sm-2">1</div>
-						<div class="form-control">
+				<div class="topics col-xs-12">
+					<div class="topic col-xs-12">
+						<div class="topicNo col-xs-2">1</div>
+						<div class="col-xs-10">
 							<input type="text" placeholder="Topic 1">
 
 							<div class="droppableDiv">
 								<span class="divPlaceholder">Add Lessons</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+							</div><!-- droppableDiv -->
+						</div><!-- form-control -->
+					</div><!-- topic -->
+				</div><!-- topics -->
+			</div><!-- rightSide -->
 		</main>
-	</div>
+	</div><!-- container-fluid -->
 
 	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
