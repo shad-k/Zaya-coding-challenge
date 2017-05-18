@@ -27,7 +27,17 @@ body {
 
 
 .main {
+	height: 90%;
+}
+
+
+.leftSide {
 	padding-top: 10px;
+}
+
+
+.rightSide {
+	margin-top: 10px;
 }
 
 
@@ -55,4 +65,65 @@ body {
 
 .contents:not(:first-child) {
 	padding-left: 10px;
+}
+
+
+.rightHeader, .topicHeader {
+	background-color: grey;
+	padding-left: 10px;
+	color: #FFF;
+}
+
+
+.courseName {
+
+	font-size: 1.5em;
+}
+
+
+.topics {
+	padding-top: 10px;
+}
+
+
+.topic {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+
+.topicNo {
+	background-color: #CCC;
+	color: #FFF;
+	border-radius: 50%;
+}
+
+
+.topicBody {
+	padding-left: 10px;
+}
+
+
+.droppableDiv {
+	margin-top: 10px;
+	border: 1px dashed grey;
+	padding: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50%;
+	color: #CCC;
+}
+
+
+
+@media screen and (min-width: 768px) {
+	.leftSide, .rightSide {
+		border-right: 2px solid grey;
+		height: 100%;
+	}
+
+	.rightSide {
+		margin-top: 0px;
+	}
 }
