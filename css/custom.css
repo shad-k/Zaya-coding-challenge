@@ -1,0 +1,58 @@
+* {
+	box-sizing: border-box;
+}
+
+
+html {
+	width: 100vw;
+	height: 100vh;
+}
+
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+
+.container-fluid {
+	height: 100%;
+}
+
+
+.header {
+	height: 10%;
+	background-color: #88FFAA;
+}
+
+
+.main {
+	padding-top: 10px;
+}
+
+
+.lesson {
+	margin-top: 10px;
+	border: 1px solid grey;
+}
+
+
+.hRule {
+	width: 100%;
+	margin: 0;
+}
+
+
+.lessonSubject, .lessonGrade {
+	padding-top: 10px;
+}
+
+
+.lessonContents {
+	padding-top: 10px;
+}
+
+
+.contents:not(:first-child) {
+	padding-left: 10px;
+}

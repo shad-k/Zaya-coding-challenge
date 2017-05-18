@@ -8,12 +8,12 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<header></header>
+		<header class="header"></header>
 
-		<main class="row">
+		<main class="row main">
 			<div class="leftSide col-xs-12 col-sm-6">
 				<div class="selectors col-xs-12">
-					<div class="dropdown col-sm-3">
+					<div class="dropdown col-xs-12 col-sm-3 subject">
 						<button class="btn btn-default dropdown-toggle col-xs-12" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							Subject
 							<span class="caret"></span>
@@ -24,40 +24,38 @@
 						</ul>
 					</div><!-- dropdown Subject-->
 
-					<div class="dropdown col-sm-3">
+					<div class="dropdown col-xs-12 col-sm-offset-1 col-sm-3 grade">
 						<button class="btn btn-default dropdown-toggle col-xs-12" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							Grade
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
+							<li>1</li>
+							<li>2</li>
 						</ul>
 					</div><!-- dropdown Grade-->
-
-					<div class="searchBar col-sm-4">
-						<div class="input-group">
-							<!-- <span class="glyphicon glyphicon-search input-group-addon"></span> -->
-							<input type="text" class="form-control" placeholder="&#61447; Search">
-						</div>
+					<div class="col-xs-12 col-sm-offset-1 col-sm-3 searchBar">
+						<input type="text" class="searchBar form-control col-sm-3" placeholder="Search">
 					</div><!-- searchBar -->
 				</div><!-- selectors -->
 
-				<div class="lessons col-xs-12">
+				<div class="lessons col-xs-12 col-sm-11">
 					<div class="lesson col-xs-12">
-						<div class="col-sm-4 lessonImg">
+						<div class="col-xs-4 lessonImg">
 							<img src="http://placeholder.pics/svg/200x150/3819FF-FF3F3F" alt="" class="col-xs-12 img-responsive">
 						</div><!-- lessonImg -->
 
-						<div class="lessonDetails col-sm-6">
-							<h4 class="title col-xs-12">Indices</h4>
-							<span class="lessonSubject col-xs-6">Algebra</span>
-							<span class="lessonGrade col-xs-6">Grade 5</span>
-							<div class="col-xs-12 lessonContents">
-								<span class="lessonVideo">1</span>
+						<div class="lessonDetails col-xs-8">
+							<h4 class="title col-xs-offset-1 col-xs-11">Indices</h4>
+							<hr class="hRule" />
+							<span class="lessonSubject col-xs-offset-1 col-xs-6">Algebra</span>
+							<span class="lessonGrade col-xs-5">Grade 5</span>
+							<div class="col-xs-offset-1 col-xs-11 lessonContents">
+								<span class="contents">1</span>
 								<span class="glyphicon glyphicon-facetime-video"></span>
-								<span class="lessonVideo">1</span>
+								<span class="contents">1</span>
 								<span class="glyphicon glyphicon-file"></span>
-								<span class="lessonVideo">1</span>
+								<span class="contents">1</span>
 								<span class="glyphicon glyphicon-question-sign"></span>
 							</div><!-- lessonContents -->
 						</div><!-- lessonDetails -->
