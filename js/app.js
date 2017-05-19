@@ -69,14 +69,22 @@ $(function() {
 		return this.lessons;
 	},
 	saveTopic: function(topic) {
-		var id = this.topics.length;
 		var title = topic;
 		var obj = {
-			id: id,
-			title: title
+			title: title,
+			lessons: []
 		};
 		this.topics.push(obj);
-		console.log(obj);
+	},
+	saveLesson: function(topic, lessonId) {
+		this.topics[topic - 1].lessons.push(lessonId);
+		console.log(this.topics);
+	},
+	removeLesson: function(topic, lessonId) {
+		var index = this.topics[topic - 1].lessons.indexOf(lessonId);
+		console.log(index);
+		this.topics[topic - 1].lessons.splice(index, 1);
+		console.log(this.topics);
 	}
 };
 
@@ -120,8 +128,17 @@ var App = {
 	saveTopic: function(topic) {
 		Data.saveTopic(topic);
 	},
-	addTopicLesson: function(topic, lessonTitle) {
-		console.log(topic, lessonTitle);
+	addTopicLesson: function(topic, lessonId) {
+		Data.saveLesson(topic, lessonId);
+	},
+	removeTopicLesson: function(topic, lessonId) {
+		console.log(topic, lessonId)
+		Data.removeLesson(topic, lessonId);
+	},
+	checkLessonId: function(topicId, lessonId) {
+		if(Data.topics[topicId - 1].lessons.indexOf(lessonId)) {
+			return true;
+		}
 	}
 };
 
@@ -171,7 +188,7 @@ var View = {
 	setLessons: function(lessons) {
 		$(".lessons").empty();
 		lessons.forEach(function(lesson) {
-			var html = '<div class="lesson col-xs-12"><div class="col-xs-4 lessonImg">'
+			var html = '<div class="lesson col-xs-12" id='+ lesson.id + '><div class="col-xs-4 lessonImg">'
 						+ '<img src="http://placeholder.pics/svg/200x150/3819FF-FF3F3F" alt="" class="col-xs-12 img-responsive">' +
 						'</div><div class="lessonDetails col-xs-8">'
 						+ '<h4 class="title col-xs-offset-1 col-xs-11">'+ lesson.title
@@ -251,19 +268,42 @@ var View = {
 
 		$(".droppableDiv").droppable({
 			drop: function(event, ui) {
+				var eventTarget = event.target;
+				var topicId = $(eventTarget).attr("id");
+
 				var target = ui.draggable[0];
-				var img = $(target).find("img").attr("src");
+				var id = $(target).attr("id");
 
-				var title = $(target).find(".title").text();
+				if(!$(eventTarget).parent().find(".topicText").val()) {
+					alert("First enter the Topic name");
+				} else if(!App.checkLessonId(topicId, id)){
+					alert("This lesson is already added to the topic");
+				} else {
 
-				var html = '<div class="topicLesson">'
-						   + '<img class="topicLessonImg" src="' + img + '">'
-						   + '<h5 class="topicLessonTitle">' + title + '</h5>'
-						   + '<span class="removeTopicLesson glyphicon glyphicon-remove-circle"></span>';
+					var img = $(target).find("img").attr("src");
 
-				$(event.target).before(html);
+					var title = $(target).find(".title").text();
 
-				App.addTopicLesson($(event.target).attr("id"), title);
+
+
+					var html = '<div class="topicLesson" id=' + id + '>'
+							   + '<img class="topicLessonImg" src="' + img + '">'
+							   + '<h5 class="topicLessonTitle">' + title + '</h5>'
+							   + '<span class="glyphicon glyphicon-remove-circle" id="remove' + topicId + id + '"></span></div>';
+
+					$(eventTarget).before(html);
+
+					App.addTopicLesson(topicId, id);
+
+					$("#remove" + topicId + id).click((function(event) {
+						return function(event) {
+							$(this).parent().remove();
+							var lessonId = $(this).parent().attr("id");
+							console.log(lessonId);
+							App.removeTopicLesson(topicId, lessonId);
+						};
+					})());
+				}
 			}
 		});
 	}
