@@ -317,7 +317,7 @@ var View = {
 		$(".lesson").show();
 
 		// If subject is to be filtered
-		if(subject !== "All") {
+		if(subject !== "All" && subject !== "Subject") {
 			$(".lesson").each(function(lesson) {
 				// Find the subject of the current lesson
 				var lessonSubject = $(this).find(".lessonSubject").text();
@@ -330,7 +330,7 @@ var View = {
 		}
 
 		// If grade is to be filtered
-		if(grade !== "Grade All") {
+		if(grade !== "Grade All" && grade !== "Grade Grade") {
 			// Run the callback function on all the visible lessons
 			// That is those not filtered out by the subject filter
 			$(".lesson:visible").each(function(lesson) {
