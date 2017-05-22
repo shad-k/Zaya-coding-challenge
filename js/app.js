@@ -47,8 +47,7 @@ $(function() {
 			noOfQuestions : 1
 		}
 	],
-	topics: [
-	],
+	topics: [],
 	sendSubjects: function() {
 		var subjects = [];
 		this.lessons.forEach(function(lesson) {
@@ -136,25 +135,56 @@ var App = {
 		Data.removeLesson(topic, lessonId);
 	},
 	checkLessonId: function(topicId, lessonId) {
-		if(Data.topics[topicId - 1].lessons.indexOf(lessonId)) {
+		if(Data.topics[topicId - 1].lessons.indexOf(lessonId) === -1) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 };
 
 
 var View = {
+	// Initialization
 	init: function() {
 		let topic = 1;
 		let self = this;
-		self.setDropDowns();
 
-		var lessons = App.getLessons();
-		self.setLessons(lessons);
+		// Set the dropdowns
+		// Subject dropdown
+		var subjects = App.getSubjects();
+
+		subjects.forEach(function(subject) {
+			$("#subject").append("<li>" + subject + "</li>");
+		});
+
+		// Grade dropdown
+		var grades = App.getGrade();
+		grades.sort();
+
+
+		grades.forEach(function(grade) {
+			$("#grade").append("<li>" + grade + "</li>");
+		});
+
+		// Show all the lessons in the data
+		self.setLessons(App.getLessons());
 
 		$("#subject li").click(self.filterSubject);
 		$("#grade li").click(self.filterGrade);
+
+
+		// Add first topic div
 		self.addTopic(topic++);
+
+		// Set event handlers for topic
+		$(".rightSide").on("keypress", ".topicText", function(event) {
+			if(event.keyCode === 13) {
+				console.log("Add topic" + this.value);
+				App.saveTopic(this.value);
+			}
+		});
+
 
 		$(".lesson").draggable({
 			helper: function(event) {
@@ -166,23 +196,18 @@ var View = {
 			revert: "invalid",
 		});
 
+		$(".rightSide").on("click", ".remove", function(event) {
+			var parent = $(this).parent(".topicLesson");
+			var lessonId = parent.attr("id");
+
+			var topicId = parent.nextAll(".droppableDiv").attr("data-id");
+
+			App.removeTopicLesson(topicId, lessonId);
+			parent.remove();
+		});
+
 		$(".addTopic").click(function(){
 			self.addTopic(topic++);
-		});
-	},
-	setDropDowns: function() {
-		var subjects = App.getSubjects();
-
-		subjects.forEach(function(subject) {
-			$("#subject").append("<li>" + subject + "</li>");
-		});
-
-		var grades = App.getGrade();
-		grades.sort();
-
-
-		grades.forEach(function(grade) {
-			$("#grade").append("<li>" + grade + "</li>");
 		});
 	},
 	setLessons: function(lessons) {
@@ -210,40 +235,39 @@ var View = {
 	},
 	filterSubject: function(event) {
 		var target = $(event.target);
-		$(".subject").html(target.text() + '<span class="caret"></span>');
+		var subject = target.text();
+		$(".subject").html(subject + '<span class="caret"></span>');
 
-		var lessons = App.getLessons();
-
-		if(target.text() === "All") {
-			View.setLessons(lessons);
-		} else {
-			var showLessons = [];
-			lessons.forEach(function(lesson) {
-				if(target.text() === lesson.subject) {
-					showLessons.push(lesson);
+		if(subject !== "All") {
+			$(".lesson").each(function(lesson) {
+				var lessonSubject = $(this).find(".lessonSubject").text();
+				if(lessonSubject !== subject) {
+					$(this).hide();
+				} else {
+					$(this).show();
 				}
 			});
-
-			View.setLessons(showLessons);
+		} else {
+			$(".lesson").show();
 		}
 	},
 	filterGrade: function(event) {
 		var target = $(event.target);
-		$(".grade").html(target.text() + '<span class="caret"></span>');
+		var grade = target.text();
+		$(".grade").html(grade + '<span class="caret"></span>');
 
-		var lessons = App.getLessons();
-
-		if(target.text() === "All") {
-			View.setLessons(lessons);
-		} else {
-			var showLessons = [];
-			lessons.forEach(function(lesson) {
-				if(target.text() == lesson.grade) {
-					showLessons.push(lesson);
+		if(grade !== "All") {
+			grade = "Grade " + target.text();
+			$(".lesson").each(function(lesson) {
+				var lessonGrade = $(this).find(".lessonGrade").text();
+				if(lessonGrade !== grade) {
+					$(this).hide();
+				} else {
+					$(this).show();
 				}
 			});
-
-			View.setLessons(showLessons);
+		} else {
+			$(".lesson").show();
 		}
 	},
 	addTopic: function(topic) {
@@ -251,30 +275,25 @@ var View = {
 					+ '<div class="topicNo col-xs-1 text-center">' + topic + '</div>'
 					+ '<div class="col-xs-10 topicBody">'
 					+ '<input type="text" class="topicText form-control" placeholder="Write topic and press Enter">'
-					+ '<div class="droppableDiv" id="' + topic + '">'
+					+ '<div class="droppableDiv" data-id="' + topic
+					+ '" id="topic' + topic + '">'
 					+ '<span class="divPlaceholder">Add Lessons</span>'
 					+ '</div>'
 					+ '</div>'
 					+ '</div>';
 		$(".topics").append(html);
 
-		$(".topicText").unbind("keypress");
-
-		$(".topicText").keypress(function(event) {
-			if(event.keyCode === 13) {
-				App.saveTopic(this.value);
-			}
-		});
-
-		$(".droppableDiv").droppable({
+		$("#topic" + topic).droppable({
 			drop: function(event, ui) {
 				var eventTarget = event.target;
-				var topicId = $(eventTarget).attr("id");
+				var topicId = $(eventTarget).attr("data-id");
 
 				var target = ui.draggable[0];
 				var id = $(target).attr("id");
 
-				if(!$(eventTarget).parent().find(".topicText").val()) {
+				var topicName = $(eventTarget).parent().find(".topicText").val();
+
+				if(!topicName) {
 					alert("First enter the Topic name");
 				} else if(!App.checkLessonId(topicId, id)){
 					alert("This lesson is already added to the topic");
@@ -289,21 +308,21 @@ var View = {
 					var html = '<div class="topicLesson" id=' + id + '>'
 							   + '<img class="topicLessonImg" src="' + img + '">'
 							   + '<h5 class="topicLessonTitle">' + title + '</h5>'
-							   + '<span class="glyphicon glyphicon-remove-circle" id="remove' + topicId + id + '"></span></div>';
+							   + '<span class="glyphicon glyphicon-remove-circle remove"></span></div>';
 
 					$(eventTarget).before(html);
 
 					App.addTopicLesson(topicId, id);
-
-					$("#remove" + topicId + id).click((function(event) {
-						return function(event) {
-							$(this).parent().remove();
-							var lessonId = $(this).parent().attr("id");
-							console.log(lessonId);
-							App.removeTopicLesson(topicId, lessonId);
-						};
-					})());
 				}
+			},
+			activate: function() {
+				console.log("Start");
+				var scrollPosition = $(".rightSide").offset().top;
+				console.log(scrollPosition);
+				$(window).scrollTop(scrollPosition);
+			},
+			deactivate: function() {
+				$(window).scrollTop(0);
 			}
 		});
 	}
