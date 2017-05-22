@@ -141,6 +141,12 @@ body {
 }
 
 
+.headerText {
+	margin: 0;
+	padding-left: 10px;
+}
+
+
 
 @media screen and (min-width: 768px) {
 	.leftSide, .rightSide {
