@@ -268,7 +268,7 @@ var View = {
 		// For each lesson construct the html and add to the View
 		lessons.forEach(function(lesson) {
 			var html = '<div class="lesson col-xs-12" id='+ lesson.id + '><div class="col-xs-4 lessonImg">'
-						+ '<img src="http://placeholder.pics/svg/200x150/3819FF-FF3F3F" alt="" class="col-xs-12 img-responsive">' +
+						+ '<img src="images/placeholder.png" alt="" class="col-xs-12 img-responsive">' +
 						'</div><div class="lessonDetails col-xs-8">'
 						+ '<h4 class="title col-xs-offset-1 col-xs-11">'+ lesson.title
 						+ '</h4><hr class="hRule" /><span class="lessonSubject col-xs-offset-1 col-xs-6">'
