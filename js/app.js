@@ -101,6 +101,10 @@ $(function() {
 		var index = this.topics[topic - 1].lessons.indexOf(lessonId);
 		// and delete it
 		this.topics[topic - 1].lessons.splice(index, 1);
+	},
+	removeTopic: function(topicId) {
+		// Delete the removed topic from the topics array
+		this.topics.splice(topicId - 1, 1);
 	}
 };
 
@@ -170,6 +174,9 @@ var App = {
 		} else {
 			return false;
 		}
+	},
+	removeTopic: function(topicId) {
+		Data.removeTopic(topicId);
 	}
 };
 
@@ -242,6 +249,17 @@ var View = {
 		$(".addTopic").click(function(){
 			// Add a new topic div
 			self.addTopic(topic++);
+		});
+
+		// Click event handler for the remove topic button
+		$(".topics").on("click", ".removeTopic", function(event) {
+			var topicDiv = $(this).parents(".topic");
+			var topicId = topicDiv.find(".droppableDiv").attr("data-id");
+
+			// Tell the app to remove the topic from the data
+			App.removeTopic(topicId);
+			topicDiv.remove();
+			topic--;
 		});
 	},
 	// Add the lessons to the View
@@ -330,12 +348,16 @@ var View = {
 	addTopic: function(topic) {
 		var html = '<div class="topic col-xs-12">'
 					+ '<div class="topicNo col-xs-1 text-center">' + topic + '</div>'
-					+ '<div class="col-xs-10 topicBody">'
+					+ '<div class="col-xs-9 topicBody">'
 					+ '<input type="text" class="topicText form-control" placeholder="Write topic and press Enter">'
 					+ '<div class="droppableDiv" data-id="' + topic
 					+ '" id="topic' + topic + '">'
 					+ '<span class="divPlaceholder">Add Lessons</span>'
 					+ '</div>'
+					+ '</div>'
+					+ '<div class="col-xs-1 col-xs-offset-1">'
+					+ '<span class=" text-center glyphicon glyphicon-remove-circle removeTopic ">'
+					+ '</span>'
 					+ '</div>'
 					+ '</div>';
 		$(".topics").append(html);
