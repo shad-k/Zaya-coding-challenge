@@ -102,7 +102,7 @@ body {
 
 
 .topicNo {
-	background-color: #CCC;
+	background-color: #AAA;
 	color: #FFF;
 	border-radius: 50%;
 }
@@ -117,7 +117,7 @@ body {
 	margin-top: 10px;
 	border: 1px dashed grey;
 	padding: 10px;
-	color: #CCC;
+	color: #FFF;
 }
 
 
@@ -146,6 +146,12 @@ body {
 	padding-left: 10px;
 }
 
+
+.topic {
+	background-color: #CCC;
+	margin-top: 5px;
+	padding-bottom: 5px;
+}
 
 
 @media screen and (min-width: 992px) {
