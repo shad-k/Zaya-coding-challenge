@@ -48,6 +48,12 @@ body {
 .lesson {
 	margin-top: 10px;
 	border: 1px solid grey;
+	max-height: 100px;
+}
+
+
+.lessonImg img {
+	height: 98px;
 }
 
 
