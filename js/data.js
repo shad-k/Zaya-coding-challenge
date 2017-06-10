@@ -1,4 +1,4 @@
-// This object represents the data in the app
+// This module represents the data in the app
 var Data = (function() {
 	// This array contains the JSON for the lesson data
 	var lessons = [

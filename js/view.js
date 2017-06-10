@@ -1,4 +1,4 @@
-// This object literal represents all the interactive/visual elements of the app
+// This module represents all the interactive/visual elements of the app
 var View = (function() {
 	// Initialization
 	var init = function() {
@@ -78,7 +78,7 @@ var View = (function() {
 		});
 
 		$(".searchBar").on("keyup", function(event) {
-			filterSearch($(this).val());
+			filter();
 		});
 	};
 
@@ -133,11 +133,23 @@ var View = (function() {
 		var grade = $(".grade").text().trim();
 		grade = "Grade " + grade;
 
+		var query = $(".searchBar").val();
+
 		// If all the subjects and grades are selected
 		// OR
 		// each time a filter other than "All" is applied
 		// show all the lessons
 		$(".lesson").show();
+
+		$(".lesson").each(function(lesson) {
+			var title = $(this).find(".title").text();
+			if(title.includes(query)) {
+				$(this).show();
+			}
+			else {
+				$(this).hide();
+			}
+		});
 
 		// If subject is to be filtered
 		if(subject !== "All" && subject !== "Subject") {
@@ -238,19 +250,6 @@ var View = (function() {
 			// scroll back to the list of lessons
 			deactivate: function() {
 				$(window).scrollTop(0);
-			}
-		});
-	};
-
-	var filterSearch = function(query) {
-		$(".lesson").show();
-		$(".lesson").each(function(lesson) {
-			var title = $(this).find(".title").text();
-			if(title.includes(query)) {
-				$(this).show();
-			}
-			else {
-				$(this).hide();
 			}
 		});
 	};

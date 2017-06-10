@@ -1,4 +1,4 @@
-// This object literal represents the app
+// This module represents the app
 // It initializes the app and handles all the interactions between Data and View
 var App = (function() {
 	// Initialize the app
