@@ -27,7 +27,7 @@ $(function() {
 		},
 		{
 			id : 3,
-			title : "Lorem Ipsum",
+			title : "Advanced English",
 			subject : "English",
 			grade : 1,
 			noOfVideos : 0,
@@ -261,6 +261,10 @@ var View = {
 			topicDiv.remove();
 			topic--;
 		});
+
+		$(".searchBar").on("keyup", function(event) {
+			self.filterSearch($(this).val());
+		});
 	},
 	// Add the lessons to the View
 	setLessons: function(lessons) {
@@ -414,6 +418,18 @@ var View = {
 			// scroll back to the list of lessons
 			deactivate: function() {
 				$(window).scrollTop(0);
+			}
+		});
+	},
+	filterSearch: function(query) {
+		$(".lesson").show();
+		$(".lesson").each(function(lesson) {
+			var title = $(this).find(".title").text();
+			if(title.includes(query)) {
+				$(this).show();
+			}
+			else {
+				$(this).hide();
 			}
 		});
 	}
