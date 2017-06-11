@@ -32,7 +32,8 @@ var View = (function() {
 		// Set event handlers for topic
 		$(".rightSide").on("keypress", ".topicText", function(event) {
 			if(event.keyCode === 13) {
-				App.saveTopic(this.value);
+				var topicId = $(this).attr("id");
+				App.saveTopic(topicId, this.value);
 			}
 		});
 
@@ -185,7 +186,7 @@ var View = (function() {
 		var html = '<div class="topic col-xs-12">'
 					+ '<div class="topicNo col-xs-1 text-center">' + topic + '</div>'
 					+ '<div class="col-xs-9 topicBody">'
-					+ '<input type="text" class="topicText form-control" placeholder="Write topic and press Enter">'
+					+ '<input id="' + topic + '" type="text" class="topicText form-control" placeholder="Write topic and press Enter">'
 					+ '<div class="droppableDiv" data-id="' + topic
 					+ '" id="topic' + topic + '">'
 					+ '<span class="divPlaceholder">Add Lessons</span>'
@@ -252,6 +253,8 @@ var View = (function() {
 				$(window).scrollTop(0);
 			}
 		});
+
+		App.addTopic(topic);
 	};
 
 	return {

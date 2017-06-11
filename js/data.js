@@ -77,16 +77,10 @@ var Data = (function() {
 	};
 
 	// Add a new topic to the topics array
-	var saveTopic = function(topic) {
+	var saveTopic = function(topicId, topic) {
 		var title = topic;
-		// Create an object literal for the new topic
-		var obj = {
-			title: title,
-			lessons: []
-		};
 
-		// Push the new object literal into the topics array
-		topics.push(obj);
+		topics[topicId - 1].title = title;
 	};
 	// Add a new lesson to a particular topic
 	var saveLesson = function(topic, lessonId) {
@@ -114,7 +108,11 @@ var Data = (function() {
 		} else {
 			return false;
 		}
-	}
+	};
+
+	var addTopic = function(topicId) {
+		topics[topicId - 1] = {lessons: []};
+	};
 
 	return {
 		sendSubjects: sendSubjects,
@@ -124,6 +122,7 @@ var Data = (function() {
 		checkLessonId: checkLessonId,
 		saveLesson: saveLesson,
 		removeLesson: removeLesson,
-		removeTopic: removeTopic
+		removeTopic: removeTopic,
+		addTopic: addTopic
 	};
 })();

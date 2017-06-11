@@ -48,8 +48,8 @@ var App = (function() {
 	};
 
 	// Add a new topic
-	var saveTopic = function(topic) {
-		Data.saveTopic(topic);
+	var saveTopic = function(topicId, topic) {
+		Data.saveTopic(topicId, topic);
 	};
 
 	// Add a lesson to a topic
@@ -67,9 +67,14 @@ var App = (function() {
 	var checkLessonId = function(topicId, lessonId) {
 		return Data.checkLessonId(topicId, lessonId);
 	};
+
 	var removeTopic = function(topicId) {
 		Data.removeTopic(topicId);
 	};
+
+	var addTopic = function(topicId) {
+		Data.addTopic(topicId);
+	}
 
 	return {
 		init: init,
@@ -80,6 +85,7 @@ var App = (function() {
 		checkLessonId: checkLessonId,
 		addTopicLesson: addTopicLesson,
 		removeTopicLesson: removeTopicLesson,
-		removeTopic: removeTopic
+		removeTopic: removeTopic,
+		addTopic: addTopic
 	};
 })();
