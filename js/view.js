@@ -216,11 +216,29 @@ var View = (function() {
 
 				if(!topicName) {
 					// If topic name is not provided show an error to the user
-					alert("First enter the Topic name");
+					// alert("First enter the Topic name");
+					$(".alertText").text("First enter the Topic name");
+					$(".alertDiv")
+						.addClass("alert-danger")
+						.show()
+						.delay(2000);
+					setTimeout(function() {
+						$(".alertDiv").hide().removeClass("alert-danger");
+					}, 5000);
+						// .hide()
+						// .removeClass("alert-danger");
 				} else if(!App.checkLessonId(topicId, id)){
 					// Check if the lesson has already been added
 					// If yes show an error to the user
-					alert("This lesson is already added to the topic");
+					// alert("This lesson is already added to the topic");
+					$(".alertText").text("This lesson is already added to the topic");
+					$(".alertDiv")
+						.addClass("alert-danger")
+						.show()
+						.delay(2000);
+					setTimeout(function() {
+						$(".alertDiv").hide().removeClass("alert-danger");
+					}, 5000);
 				} else {
 					// If the lesson has not already been added
 					// Extract the value of image source and title from
