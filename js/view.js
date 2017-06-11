@@ -287,11 +287,6 @@ var View = (function() {
 			activate: function() {
 				var scrollPosition = $(".rightSide").offset().top;
 				$(window).scrollTop(scrollPosition);
-			},
-			// When the drop is finished on a device other than desktop
-			// scroll back to the list of lessons
-			deactivate: function() {
-				$(window).scrollTop(0);
 			}
 		});
 
