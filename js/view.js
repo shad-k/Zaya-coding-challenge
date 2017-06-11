@@ -34,6 +34,20 @@ var View = (function() {
 			if(event.keyCode === 13) {
 				var topicId = $(this).attr("id");
 				App.saveTopic(topicId, this.value);
+
+				// If danger class is added remove it
+				$(".alertDiv").removeClass("alert-danger");
+
+				// Change text of the alert
+				$(".alertText").text("Topic title added/changed")
+
+				// Make the alert visible
+				$(".alertDiv").addClass("alert-info").show();
+
+				// Hide div after 5 secs
+				setTimeout(function() {
+					$(".alertDiv").hide().removeClass("alert-info");
+				}, 5000);
 			}
 		});
 
@@ -216,8 +230,14 @@ var View = (function() {
 
 				if(!topicName) {
 					// If topic name is not provided show an error to the user
-					// alert("First enter the Topic name");
+
+					// If info class is added to the alert, remove it
+					$(".alertDiv").removeClass("alert-info");
+
+					// Change alert text
 					$(".alertText").text("First enter the Topic name");
+
+					// Show the alert and hide after 5 secs
 					$(".alertDiv")
 						.addClass("alert-danger")
 						.show()
@@ -225,13 +245,17 @@ var View = (function() {
 					setTimeout(function() {
 						$(".alertDiv").hide().removeClass("alert-danger");
 					}, 5000);
-						// .hide()
-						// .removeClass("alert-danger");
 				} else if(!App.checkLessonId(topicId, id)){
 					// Check if the lesson has already been added
 					// If yes show an error to the user
-					// alert("This lesson is already added to the topic");
+
+					// If info class is added to the alert, remove it
+					$(".alertDiv").removeClass("alert-info");
+
+					// Change alert text
 					$(".alertText").text("This lesson is already added to the topic");
+
+					// Show the alert and hide after 5 secs
 					$(".alertDiv")
 						.addClass("alert-danger")
 						.show()
