@@ -99,7 +99,7 @@ var Data = (function() {
 
 	var removeTopic = function(topicId) {
 		// Delete the removed topic from the topics array
-		topics.splice(topicId - 1, 1);
+		topics[topicId - 1] = {};
 	};
 
 	// Check if the lesson already exists in the topic

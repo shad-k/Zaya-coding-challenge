@@ -85,7 +85,7 @@ var View = (function() {
 		$(".topics").on("click", ".removeTopic", function(event) {
 			var topicDiv = $(this).parents(".topic");
 			var topicId = topicDiv.find(".droppableDiv").attr("data-id");
-
+			console.log(topicId);
 			// Tell the app to remove the topic from the data
 			App.removeTopic(topicId);
 			topicDiv.remove();
