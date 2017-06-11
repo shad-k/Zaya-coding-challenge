@@ -102,6 +102,7 @@ var Data = (function() {
 		topics.splice(topicId - 1, 1);
 	};
 
+	// Check if the lesson already exists in the topic
 	var checkLessonId = function(topicId, lessonId) {
 		if(topics[topicId - 1].lessons.indexOf(lessonId) === -1) {
 			return true;
@@ -110,10 +111,12 @@ var Data = (function() {
 		}
 	};
 
+	// Add a new topic object to the topics array
 	var addTopic = function(topicId) {
 		topics[topicId - 1] = {lessons: []};
 	};
 
+	// Expose the methods to the outside scope
 	return {
 		sendSubjects: sendSubjects,
 		sendGrades: sendGrades,

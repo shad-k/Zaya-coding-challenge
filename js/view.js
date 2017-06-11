@@ -89,7 +89,6 @@ var View = (function() {
 			// Tell the app to remove the topic from the data
 			App.removeTopic(topicId);
 			topicDiv.remove();
-			topic--;
 		});
 
 		$(".searchBar").on("keyup", function(event) {

@@ -68,14 +68,17 @@ var App = (function() {
 		return Data.checkLessonId(topicId, lessonId);
 	};
 
+	// Call the Data method to remove the topic
 	var removeTopic = function(topicId) {
 		Data.removeTopic(topicId);
 	};
 
+	// Call the Data method to add the topic
 	var addTopic = function(topicId) {
 		Data.addTopic(topicId);
 	}
 
+	// Expose the methods to the outside scope
 	return {
 		init: init,
 		getSubjects: getSubjects,
